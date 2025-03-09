@@ -3,10 +3,8 @@ package main
 import (
 	"fmt"
 	"log"
-	"time"
 
 	"github.com/ljb6/todolist/internal/database"
-	"github.com/ljb6/todolist/internal/models"
 )
 
 func main() {
@@ -16,18 +14,19 @@ func main() {
     }
 	database.CreateTable(myDb)
 
-	task1 := models.Task{
-		Text: "My second task",
-		Done: false,
-		Time: time.Now(),
-	}
+	// task1 := models.Task{
+	// 	Text: "Third task",
+	// 	Done: false,
+	// 	Time: time.Now(),
+	// }
 
-	id, err := database.AddTask(myDb, task1)
+	// database.AddTask(myDb, task1)
+
+	x, err := database.GetTasks(myDb)
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	fmt.Println(id)
+	fmt.Println(string(x), err)
 
     defer myDb.Close()
 }
