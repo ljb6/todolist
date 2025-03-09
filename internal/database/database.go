@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"log"
 
+	"github.com/ljb6/todolist/internal/models"
 	_ "github.com/mattn/go-sqlite3"
 )
 
@@ -19,7 +20,7 @@ func CreateTable(db *sql.DB) {
 	query := `
 	CREATE TABLE IF NOT EXISTS tasks (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
-		title TEXT NOT NULL,
+		text TEXT NOT NULL,
 		done BOOLEAN NO NULL,
 		time DATETIME DEFAUL CURRENT_TIMESTAMP
 	);
@@ -31,3 +32,14 @@ func CreateTable(db *sql.DB) {
 	}
 }
 
+func AddTask(db *sql.DB, task models.Task) (int64, error) {
+	query := `INSERT INTO tasks (text, done, time) VALUES (?, ?, ?)`
+	result, err := db.Exec(query, task.Text, task.Done, task.Time)
+	
+	if err != nil {
+		return 0, err
+	}
+
+	id, err := result.LastInsertId()
+	return id, err
+}
