@@ -9,13 +9,15 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-func OpenDatabase() (*sql.DB, error) {
+var DB *sql.DB
 
-	db, err := sql.Open("sqlite3", "./tasks.db")
+func OpenDatabase() error {
+	var err error
+	DB, err = sql.Open("sqlite3", "./tasks.db")
 	if err != nil {
-		return nil, err
+		return err
 	}
-	return db, nil
+	return nil
 }
 
 func CreateTable(db *sql.DB) {
