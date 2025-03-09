@@ -1,13 +1,16 @@
 package main
 
 import (
-	"fmt"
-	"time"
+	"log"
 
-	"github.com/ljb6/todolist/internal/models"
+	"github.com/ljb6/todolist/internal/database"
 )
 
 func main() {
-	task1 := models.Task{Id:1, Text: "Compras", Done: false, Time: time.Now()}
-	fmt.Println(task1)
+	myDb, err := database.OpenDatabase()
+	if err != nil {
+        log.Fatal(err)
+    }
+	database.CreateTable(myDb)
+    defer myDb.Close()
 }
