@@ -7,5 +7,6 @@ import (
 
 func main() {
 	database.OpenDatabase()
+	database.CreateTable(database.DB)
 	routes.InitializeServer()
 }

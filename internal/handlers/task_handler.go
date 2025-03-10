@@ -27,4 +27,5 @@ func FormHandler(w http.ResponseWriter, r *http.Request) {
 	task := r.FormValue("task")
 
 	database.AddTask(database.DB, models.Task{Text: task, Done: false, Time: time.Now()})
+	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
