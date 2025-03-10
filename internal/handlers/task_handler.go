@@ -17,15 +17,14 @@ func PageHandler(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 
-	fmt.Println(string(tasks))
+	fmt.Println(tasks)
 
 	tmpl := template.Must(template.ParseFiles("web/main.html"))
-	tmpl.Execute(w, nil)
+	tmpl.Execute(w, struct{ Tasks []models.Task }{Tasks: tasks})
 }
 
 func FormHandler(w http.ResponseWriter, r *http.Request) {
 	task := r.FormValue("task")
-
 
 	database.AddTask(database.DB, models.Task{Text: task, Done: false, Time: time.Now()})
 }

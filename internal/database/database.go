@@ -2,7 +2,6 @@ package database
 
 import (
 	"database/sql"
-	"encoding/json"
 	"log"
 
 	"github.com/ljb6/todolist/internal/models"
@@ -51,7 +50,7 @@ func AddTask(db *sql.DB, task models.Task) (int64, error) {
 }
 
 // ([]models.Task, error)
-func GetTasks(db *sql.DB) ([]byte, error) {
+func GetTasks(db *sql.DB) ([]models.Task, error) {
 
 	var tasks []models.Task
 
@@ -70,9 +69,5 @@ func GetTasks(db *sql.DB) ([]byte, error) {
 		tasks = append(tasks, item)
 	}
 
-	jsonTasks, err := json.Marshal(tasks)
-	if err != nil {
-		return nil, err
-	}
-	return jsonTasks, nil
+	return tasks, nil
 }

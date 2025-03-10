@@ -14,5 +14,12 @@
             <button type="submit" class="btn btn-primary">Create</button>
         </form>
     </section>
+    <section>
+        {{ range .Tasks }}
+        <div>
+            {{ .Text }}
+        </div>
+        {{end}}
+    </section>
 </body>
 </html>
