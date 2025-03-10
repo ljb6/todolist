@@ -27,7 +27,7 @@ func CreateTable(db *sql.DB) {
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		text TEXT NOT NULL,
 		done BOOLEAN NO NULL,
-		time DATETIME DEFAULT CURRENT_TIMESTAMP
+		time TEXT NOT NULL
 	);
 	`
 
