@@ -84,3 +84,12 @@ func DeleteTask(db *sql.DB, id int8) error {
 	return nil
 }
 
+func MarkTaskAsDone(db *sql.DB, id int8) {
+	query := "UPDATE taks SET done = ? WHERE id = ?"
+	result, err := db.Exec(query, 1, id)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(result)
+}
