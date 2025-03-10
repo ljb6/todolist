@@ -37,3 +37,11 @@ func MarkAsDoneHandler(w http.ResponseWriter, r *http.Request) {
 
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
+
+func DeleteTaskHandler(w http.ResponseWriter, r *http.Request) {
+	id := r.URL.Query().Get("id")
+
+	database.DeleteTask(database.DB, id)
+
+	http.Redirect(w, r, "/", http.StatusSeeOther)
+}

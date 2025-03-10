@@ -72,7 +72,7 @@ func GetTasks(db *sql.DB) ([]models.Task, error) {
 	return tasks, nil
 }
 
-func DeleteTask(db *sql.DB, id int8) {
+func DeleteTask(db *sql.DB, id string) {
 	query := "DELETE FROM tasks WHERE id = ?" 
 	result, err := db.Exec(query, id)
 	if err != nil {
