@@ -72,16 +72,14 @@ func GetTasks(db *sql.DB) ([]models.Task, error) {
 	return tasks, nil
 }
 
-func DeleteTask(db *sql.DB, id int8) error {
+func DeleteTask(db *sql.DB, id int8) {
 	query := "DELETE FROM tasks WHERE id = ?" 
 	result, err := db.Exec(query, id)
 	if err != nil {
-		return err
+		log.Fatal(err)
 	}
 
 	fmt.Println(result.LastInsertId())
-
-	return nil
 }
 
 func MarkTaskAsDone(db *sql.DB, id int8) {
