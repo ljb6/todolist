@@ -2,6 +2,7 @@ package database
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 
 	"github.com/ljb6/todolist/internal/models"
@@ -49,7 +50,6 @@ func AddTask(db *sql.DB, task models.Task) (int64, error) {
 	return id, err
 }
 
-// ([]models.Task, error)
 func GetTasks(db *sql.DB) ([]models.Task, error) {
 
 	var tasks []models.Task
@@ -71,3 +71,16 @@ func GetTasks(db *sql.DB) ([]models.Task, error) {
 
 	return tasks, nil
 }
+
+func DeleteTask(db *sql.DB, id int8) error {
+	query := "DELETE FROM tasks WHERE id = ?" 
+	result, err := db.Exec(query, id)
+	if err != nil {
+		return err
+	}
+
+	fmt.Println(result.LastInsertId())
+
+	return nil
+}
+
