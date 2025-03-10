@@ -1,6 +1,6 @@
 # To-Do List
 
-Simple **To-Do List** application built with **Go**'s standard libraries + HTMX t
+Simple **To-Do List** application built with **Go**'s standard libraries + HTMX
 
 ```bash
 git clone https://github.com/ljb6/todolist
