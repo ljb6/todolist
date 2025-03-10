@@ -2,7 +2,6 @@ package database
 
 import (
 	"database/sql"
-	"fmt"
 	"log"
 
 	"github.com/ljb6/todolist/internal/models"
@@ -74,22 +73,18 @@ func GetTasks(db *sql.DB) ([]models.Task, error) {
 
 func DeleteTask(db *sql.DB, id string) {
 	query := "DELETE FROM tasks WHERE id = ?" 
-	result, err := db.Exec(query, id)
+	_, err := db.Exec(query, id)
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	fmt.Println(result.LastInsertId())
 }
 
 func MarkTaskAsDone(db *sql.DB, id string) {
 	query := "UPDATE tasks SET done = ? WHERE id = ?"
-	result, err := db.Exec(query, 1, id)
+	_, err := db.Exec(query, 1, id)
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	fmt.Println(result)
 }
 
 func DeleteAllTasks(db *sql.DB) {

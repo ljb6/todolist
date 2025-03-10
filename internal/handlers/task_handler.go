@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"text/template"
@@ -17,8 +16,6 @@ func PageHandler(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 
-	fmt.Println(tasks)
-
 	tmpl := template.Must(template.ParseFiles("web/main.html"))
 	tmpl.Execute(w, struct{ Tasks []models.Task }{Tasks: tasks})
 }
@@ -29,6 +26,7 @@ func FormHandler(w http.ResponseWriter, r *http.Request) {
 	formattedTime := time.Now().String()[11:16]
 
 	database.AddTask(database.DB, models.Task{Text: task, Done: false, Time: formattedTime})
+
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
 
