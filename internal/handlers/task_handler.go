@@ -47,3 +47,9 @@ func DeleteTaskHandler(w http.ResponseWriter, r *http.Request) {
 
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
+
+func DeleteAllTasksHandler(w http.ResponseWriter, r *http.Request) {
+	database.DeleteAllTasks(database.DB)
+
+	http.Redirect(w, r, "/", http.StatusSeeOther)
+}

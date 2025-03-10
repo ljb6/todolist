@@ -91,3 +91,11 @@ func MarkTaskAsDone(db *sql.DB, id string) {
 
 	fmt.Println(result)
 }
+
+func DeleteAllTasks(db *sql.DB) {
+	query := "DELETE FROM tasks"
+	_, err := db.Exec(query)
+	if err != nil {
+		log.Fatal(err)
+	}
+}	
