@@ -29,3 +29,11 @@ func FormHandler(w http.ResponseWriter, r *http.Request) {
 	database.AddTask(database.DB, models.Task{Text: task, Done: false, Time: time.Now()})
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
+
+func MarkAsDoneHandler(w http.ResponseWriter, r *http.Request) {
+	id := r.URL.Query().Get("id")
+
+	database.MarkTaskAsDone(database.DB, id)
+
+	http.Redirect(w, r, "/", http.StatusSeeOther)
+}
